@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <robot name="aloha_gripper" xmlns:xacro="http://ros.org/wiki/xacro">
 
-   <xacro:macro name="aloha_gripper_base" params="parent">
+   <xacro:macro name="aloha_gripper_base" params="parent *origin">
 
       <joint name="parent_to_attachment" type="fixed">
+         <xacro:insert_block name="origin" />
          <parent link="${parent}" />
          <child link="attachment" />
       </joint>

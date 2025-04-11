@@ -2,13 +2,14 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
+import launch_ros.descriptions
 from launch.substitutions import Command
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
     pkg_name = "aloha4franka_description"
-    urdf_file = "urdf/aloha_gripper.urdf.xacro"
+    urdf_file = "urdf/aloha_franka.urdf.xacro"
 
     urdf_path = os.path.join(get_package_share_directory(pkg_name), urdf_file)
     robot_description_content = Command(["xacro ", urdf_path])
@@ -27,7 +28,9 @@ def generate_launch_description():
             output="screen",
             parameters=[
                 {
-                    "robot_description": robot_description_content,
+                    "robot_description": launch_ros.descriptions.ParameterValue(
+                        robot_description_content, value_type=str
+                    ),
                     "use_tf_static": True,
                     "publish_frequency": 30.0,
                 }
@@ -45,10 +48,4 @@ def generate_launch_description():
                 ),
             ],
         ),
-        # Add tf2_tools to visualize the TF tree
-        # Node(
-        #     package='tf2_tools',
-        #     executable='view_frames',
-        #     name='view_frames'
-        # )
     ])
