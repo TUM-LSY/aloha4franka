@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<robot name="aloha_gripper">
+  <material name="black">
+    <color rgba="0.15 0.15 0.15 1"/>
+  </material>
+  
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
+  <link name="attachment_site">
+  </link>
+
+  <link name="gripper_link">
+    <inertial>
+      <origin xyz="0.0395662 -2.56311e-07 0.00400649" rpy="0 0 0"/>
+      <mass value="0.251652"/>
+      <inertia ixx="0.000689546" ixy="0" ixz="0" iyy="0.000650316" iyz="0" izz="0.000468142"/>
+    </inertial>
+  </link>
+
+  <link name="gripper_base">
+    <inertial>
+      <origin xyz="0.000182154 -0.0341589 -0.0106026" rpy="0 0 0"/>
+      <mass value="0.42158"/>
+      <inertia ixx="0.00110438" ixy="0" ixz="0" iyy="0.000790537" iyz="0" izz="0.000469727"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.035 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_prop.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.035 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_prop.stl"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.035 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_bar.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.035 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_bar.stl"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.035 -0.03525 -0.0227" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_wrist_mount.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.035 -0.03525 -0.0227" rpy="0 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_wrist_mount.stl"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.035 -0.0824748 -0.0095955" rpy="0 0 -2.7489"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/d405_solid.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.035 -0.0824748 -0.0095955" rpy="0 0 -2.7489"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/d405_solid.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="left_finger">
+    <inertial>
+      <origin xyz="0.0143478 -0.0284791 0.0122897" rpy="0 0 0"/>
+      <mass value="0.0862937"/>
+      <inertia ixx="5.86848e-05" ixy="0" ixz="0" iyy="4.46887e-05" iyz="0" izz="1.8397e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0141637 0.0211727 0.06" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_left.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0141637 0.0211727 0.06" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_left.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_finger">
+    <inertial>
+      <origin xyz="0.0143711 0.0284792 0.0121421" rpy="0 0 0"/>
+      <mass value="0.0862932"/>
+      <inertia ixx="5.86828e-05" ixy="0" ixz="0" iyy="4.46887e-05" iyz="0" izz="1.83949e-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0141637 -0.0211727 0.0597067" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_right.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0.0141637 -0.0211727 0.0597067" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_right.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="attachment_to_base" type="fixed">
+    <parent link="gripper_base"/>
+    <child link="attachment_site"/>
+  </joint>
+
+
+  <joint name="wrist_rotate" type="revolute">
+    <parent link="gripper_link"/>
+    <child link="gripper_base"/>
+    <origin xyz="0.069744 0 0" rpy="0 1.5708 -1.5708"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14159" upper="3.14159" effort="100" velocity="1.0"/>
+  </joint>
+
+  <joint name="left_finger_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="left_finger"/>
+    <origin xyz="0.0191 -0.0141637 0.0211727" rpy="3.14159 0 3.14159"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0.0" upper="0.041" effort="20" velocity="0.1"/>
+  </joint>
+
+  <joint name="right_finger_joint" type="prismatic">
+    <parent link="gripper_base"/>
+    <child link="right_finger"/>
+    <origin xyz="-0.0191 -0.0141637 0.0211727" rpy="3.14159 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0.0" upper="0.041" effort="20" velocity="0.1"/>
+    <mimic joint="left_finger_joint" multiplier="1.0" offset="0.0"/>
+  </joint>
+</robot>

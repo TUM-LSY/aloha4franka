@@ -54,7 +54,10 @@ RUN apt-get update && \
     cmake \
     libpoco-dev \
     libeigen3-dev \
-    dpkg
+    ros-$ROS_DISTRO-ros2-control \
+    ros-$ROS_DISTRO-ros2-controllers \
+    dpkg \
+    && rm -rf /var/lib/apt/lists/*
 
 
 # Symlink python3 to python

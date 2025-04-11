@@ -1,6 +1,6 @@
-# ROS2 Dev Docker Template
+# Aloha4Franka
 <a href="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml"><img src="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml/badge.svg"/></a>
 
-My simple devcontainer template to start ROS2 applications using my dotfiles which include nvim and zellij. If you are not using VSCode, simply run start_dev.sh in the terminal (after installing the devcontainer-cli) and you are good to go.
-
-
+This repository contains:
+- An assembly guide as well as URDF files for an aloha gripper modification that allows it to be mounted on a franka emika robot and any robot with ...
+- A simple control setup to test the gripper in ROS2

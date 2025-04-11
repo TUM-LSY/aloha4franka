@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="aloha_gripper">
+  <!-- Properties -->
+  <xacro:property name="finger_width" value="0.02"/>
+  <xacro:property name="finger_height" value="0.02"/>
+  <xacro:property name="finger_length" value="0.06"/>
+  <xacro:property name="sphere_radius" value="0.008"/>
+  
+  <!-- Materials -->
+  
+  <material name="black">
+    <color rgba="0.15 0.15 0.15 1.0"/>
+  </material>
+  
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
+  <!-- Base link -->
+  <link name="gripper_base">
+    <visual>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_prop.stl"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://aloha4franka_description/meshes/vx300s_7_gripper_prop.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Finger macro -->
+  <xacro:macro name="finger" params="prefix mirror_factor">
+    <link name="${prefix}_finger">
+      <visual>
+        <geometry>
+          <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_${prefix}.stl"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <visual>
+        <geometry>
+          <box size="${finger_width} ${finger_height} ${finger_length}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+      <visual>
+        <origin xyz="0 0 ${finger_length}"/>
+        <geometry>
+          <sphere radius="${sphere_radius}"/>
+        </geometry>
+        <material name="red"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://aloha4franka_description/meshes/vx300s_8_custom_finger_${prefix}.stl"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="${prefix}_finger_joint" type="prismatic">
+      <parent link="gripper_base"/>
+      <child link="${prefix}_finger"/>
+      <origin xyz="${mirror_factor * 0.0191} -0.0142 0.0212" rpy="0 0 0"/>
+      <axis xyz="0 0 -1"/>
+      <limit lower="0.0" upper="0.041" effort="20" velocity="0.1"/>
+      <xacro:if test="${prefix == 'right'}">
+        <mimic joint="left_finger_joint" multiplier="1.0" offset="0.0"/>
+      </xacro:if>
+    </joint>
+  </xacro:macro>
+
+  <!-- Create fingers using the macro -->
+  <xacro:finger prefix="left" mirror_factor="1"/>
+  <xacro:finger prefix="right" mirror_factor="-1"/>
+
+</robot>

@@ -1,10 +1,10 @@
 services:
-  ros2_docker_template:
+  aloha4franka:
     build:
       context: .
       args:
         ROS_DISTRO: humble
-    container_name: ros2_docker_template_container
+    container_name: aloha4franka_container
 
     # === Tune this to your application ===
     network_mode: "host"
