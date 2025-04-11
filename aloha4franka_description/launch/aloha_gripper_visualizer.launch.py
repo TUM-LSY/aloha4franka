@@ -9,14 +9,11 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     pkg_name = 'aloha4franka_description'
-    urdf_file = 'urdf/aloha_gripper.urdf'
-
-    # urdf_path = os.path.join(get_package_share_directory(pkg_name), urdf_file)
-    # robot_description_content = Command(['xacro ', urdf_path])
+    urdf_file = 'urdf/aloha_gripper.urdf.xacro'
 
     urdf_path = os.path.join(get_package_share_directory(pkg_name), urdf_file)
-    with open(urdf_path, 'r') as urdf_file:
-        robot_description_content = urdf_file.read()
+    robot_description_content = Command(['xacro ', urdf_path])
+
 
     return LaunchDescription([
         Node(
