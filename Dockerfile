@@ -69,8 +69,8 @@ RUN mkdir -p /home/ros/ros2_ws/src
 WORKDIR /home/ros/ros2_ws/src
 
 RUN git clone https://github.com/youtalk/dynamixel_hardware.git -b $ROS_DISTRO && \
-    rosdep update && \
     cd .. && \
+    rosdep update && \
     rosdep install --from-paths src --ignore-src -r -y && \
     colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
     touch src/dynamixel_hardware/COLCON_IGNORE
