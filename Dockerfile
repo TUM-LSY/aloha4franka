@@ -72,11 +72,13 @@ RUN git clone https://github.com/youtalk/dynamixel_hardware.git -b $ROS_DISTRO &
     cd .. && \
     rosdep update && \
     rosdep install --from-paths src --ignore-src -r -y && \
+    source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
     touch src/dynamixel_hardware/COLCON_IGNORE
 
 RUN git clone https://github.com/frankaemika/franka_description.git && \
     cd .. && \
+    source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
     touch src/franka_description/COLCON_IGNORE
 
