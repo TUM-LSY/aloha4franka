@@ -69,7 +69,16 @@ RUN mkdir -p /home/ros/ros2_ws/src
 
 WORKDIR /home/ros/ros2_ws/src
 
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.1/zsh-in-docker.sh)"
-# RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+RUN git clone https://github.com/youtalk/dynamixel_hardware.git -b $ROS_DISTRO && \
+    rosdep update && \
+    cd .. && \
+    rosdep install --from-paths src --ignore-src -r -y && \
+    colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
+    touch src/dynamixel_hardware/COLCON_IGNORE
 
-SHELL ["/bin/zsh", "-c"]
+RUN git clone https://github.com/frankaemika/franka_description.git && \
+    cd .. && \
+    colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
+    touch src/franka_description/COLCON_IGNORE
+
+SHELL ["/bin/bash", "-c"]
