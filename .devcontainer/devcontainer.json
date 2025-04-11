@@ -1,0 +1,24 @@
+{
+    "name": "ROS 2 - Project",
+    "privileged": true,
+    "remoteUser": "ros",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "workspaceFolder": "/home/ros/ros2_ws/src/ros2_docker_template",
+    "service": "ros2_docker_template",
+    "features": {
+        "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {
+            "version": "stable"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        },
+        "ghcr.io/larsnieuwenhuizen/features/zellij:0": {
+            "version": "0.0.4"
+        }
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/home/ros/ros2_ws/src/ros2_docker_template,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.env,target=/home/ros/.env,type=bind,consistency=cached"
+    ],
+    "postStartCommand": "/bin/bash /home/ros/ros2_ws/src/ros2_docker_template/.devcontainer/post_create.sh"
+}
