@@ -13,7 +13,7 @@ services:
     privileged: true
     # ===
 
-    command: /bin/zsh
+    command: /bin/bash
     tty: true
     stdin_open: true
 
@@ -27,7 +27,7 @@ services:
       DISPLAY: $DISPLAY
       ROS_DOMAIN_ID: 100
       RCUTILS_COLORIZED_OUTPUT: 1
-      SHELL: /bin/zsh
+      SHELL: /bin/bash
 
     cap_add:
       - SYS_NICE

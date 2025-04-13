@@ -11,7 +11,7 @@ class PositionCommander(Node):
     def __init__(self):
         super().__init__("position_commander")
         self.publisher_ = self.create_publisher(
-            Float64MultiArray, "position_controller/commands", 10
+            Float64MultiArray, "gripper_position_controller/commands", 10
         )
         self.min_value = 0.0
         self.max_value = 0.041
