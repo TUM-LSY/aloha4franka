@@ -1,4 +1,7 @@
+![Aloha4franka](media/Aloha_Assembly_2025-May-07_05-29-50PM-000_CustomizedView22279176464.png)
+
 # Aloha4Franka
+
 <a href="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml"><img src="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml/badge.svg"/></a>
 
 This repository contains:
