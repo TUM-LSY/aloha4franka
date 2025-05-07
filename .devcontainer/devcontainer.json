@@ -6,9 +6,6 @@
     "workspaceFolder": "/home/ros/ros2_ws/src/aloha4franka",
     "service": "aloha4franka",
     "features": {
-        "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {
-            "version": "stable"
-        },
         "ghcr.io/devcontainers/features/node:1": {
             "version": "lts"
         },

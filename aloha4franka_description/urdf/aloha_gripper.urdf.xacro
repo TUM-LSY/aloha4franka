@@ -5,7 +5,9 @@
 
   <link name="world"/>
 
-  <xacro:aloha_gripper_base parent="world"/>
+  <xacro:aloha_gripper_base parent="world">
+    <origin xyz="0 0 0" rpy="0 0 -3.7524578918" />
+  </xacro:aloha_gripper_base>
 
-  <xacro:aloha_gripper_ros2_control name="aloha_gripper_ros2_control" use_dummy="true"/>
+  <xacro:aloha_gripper_ros2_control name="aloha_gripper_ros2_control" use_dummy="false"/>
 </robot>

@@ -8,8 +8,8 @@
       <hardware>
         <plugin>dynamixel_hardware/DynamixelHardware</plugin>
         <param name="usb_port">/dev/ttyUSB0</param>
-        <param name="baud_rate">1000000</param>
-        <param name="use_dummy">true</param>
+        <param name="baud_rate">57600</param>
+        <param name="use_dummy">false</param>
 
       </hardware>
       <joint name="left_finger_joint">
@@ -20,6 +20,14 @@
         <state_interface name="velocity"/>
         <state_interface name="effort"/>
       </joint>
+      <transmission name="transmission1">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="actuator" role="actuator"/>
+        <joint name="left_finger_joint" role="left_finger_joint">
+          <mechanical_reduction>100.0</mechanical_reduction>
+          <offset>0.0</offset>
+        </joint>
+      </transmission>
     </ros2_control>
 
   </xacro:macro>

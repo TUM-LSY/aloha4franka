@@ -14,9 +14,10 @@ class PositionCommander(Node):
             Float64MultiArray, "gripper_position_controller/commands", 10
         )
         self.min_value = 0.0
-        self.max_value = 0.041
+        # self.max_value = 0.041
+        self.max_value = 2.0
 
-        self.timer_frequency = 10.0
+        self.timer_frequency = 50.0
         self.timer_period = 1.0 / self.timer_frequency
         self.timer = self.create_timer(self.timer_period, self.publish_command)
 
