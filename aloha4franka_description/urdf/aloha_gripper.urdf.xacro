@@ -3,11 +3,15 @@
   <xacro:include filename="$(find aloha4franka_description)/urdf/aloha_gripper_base.urdf.xacro" />
   <xacro:include filename="$(find aloha4franka_description)/urdf/aloha_gripper.ros2_control.urdf.xacro" />
 
+  <!--<xacro:arg name="use_dummy" default="false" />-->
+  <xacro:arg name="device" default="/dev/ttyUSB0" />
+  <xacro:arg name="uncontrolled" default="false" />
+
   <link name="world"/>
 
   <xacro:aloha_gripper_base parent="world">
     <origin xyz="0 0 0" rpy="0 0 -3.7524578918" />
   </xacro:aloha_gripper_base>
 
-  <xacro:aloha_gripper_ros2_control name="aloha_gripper_ros2_control" use_dummy="false"/>
+  <xacro:aloha_gripper_ros2_control name="aloha_gripper_ros2_control" use_dummy="false" device="$(arg device)" uncontrolled="$(arg uncontrolled)"/>
 </robot>

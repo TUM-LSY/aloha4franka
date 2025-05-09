@@ -1,19 +1,28 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="aloha_gripper_ros2_control" params="name use_dummy">
+  <xacro:macro name="aloha_gripper_ros2_control" params="name use_dummy device uncontrolled">
 
     <ros2_control name="${name}" type="system">
 
       <hardware>
         <plugin>dynamixel_hardware/DynamixelHardware</plugin>
-        <param name="usb_port">/dev/ttyUSB0</param>
+        <param name="usb_port">${device}</param>
         <param name="baud_rate">57600</param>
         <param name="use_dummy">false</param>
 
       </hardware>
       <joint name="left_finger_joint">
         <param name="id">1</param>
+
+      <xacro:if value="${uncontrolled}">
+        <param name="Position_P_Gain">0</param>
+        <param name="Position_I_Gain">0</param>
+        <param name="Position_D_Gain">0</param>
+        <param name="Velocity_P_Gain">0</param>
+        <param name="Velocity_I_Gain">0</param>
+      </xacro:if>
+
         <command_interface name="position"/>
         <command_interface name="velocity"/>
         <state_interface name="position"/>

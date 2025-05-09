@@ -1,7 +1,6 @@
 import os
 
 import launch_ros.descriptions
-from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.events import Shutdown
 from launch.substitutions import Command
