@@ -19,11 +19,12 @@ This repository contains:
 | 1 | U2D2 Controller | [Reichelt](https://www.reichelt.de/de/de/shop/produkt/dynamixel_u2d2-263256?PROVID=2788&gad_source=1&gclid=CjwKCAjwktO_BhBrEiwAV70jXnXg4zTiIdI9f9MVoYfChmQ_a8Ncw8nTg040xoYzePDXbz_71C89ABoClOgQAvD_BwE)||
 | 8 | Normal head M2 x 8mm for finger adaptor on linear rails |  |  |
 | 2 | Normal head M2 x 10 mm for motor disk |  |  |
-| 4 | Flathead head M3 x 12 mm for linear + backplate connection |  |  |
-| 4 | Flathead head M2 x 10 mm for linear on rail |  |  |
-| 6 | Flathead head M2 x 20 mm for fingers |  |  |
-| 4 | Flathead head M2.5 x 12 mm for motor attachment |  |  |
+| 4 | Flathead M3 x 12 mm for linear + backplate connection |  |  |
+| 4 | Flathead M2 x 10 mm for linear on rail |  |  |
+| 6 | Flathead M2 x 20 mm for fingers |  |  |
+| 4 | Flathead M2.5 x 12 mm for motor attachment |  |  |
 | 2 | Normal head M3 x 20-22 mm for u-shape connection to finger adaptor |  |  |
+| 2 | Flathead M3 x 10 mm for u-shape connection to rotor |  |  |
 
 Tools for assembly
 - M2 Tap [Conrad](https://www.conrad.de/de/p/eventus-by-exact-40701-gewindereparaturbohrer-m2-1-st-1224686.html)
