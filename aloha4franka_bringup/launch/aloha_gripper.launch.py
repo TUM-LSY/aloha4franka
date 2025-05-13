@@ -78,6 +78,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="spawner",
         arguments=["gripper_position_controller", "-c", "controller_manager"],
+        # arguments=["gripper_effort_controller", "-c", "controller_manager"],
         output="screen",
     )
     joint_state_broadcaster_spawner = Node(

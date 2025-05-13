@@ -170,7 +170,7 @@
          <origin xyz="-0.0191 -0.0141637 0.0211727" rpy="1.5707963267948966 0.0 1.5707963267948966"/>
          <axis xyz="0 0 -1"/>
          <mimic joint="left_finger_joint" multiplier="1.0" offset="0.0"/>
-         <limit lower="0.0" upper="0.041" effort="20" velocity="0.1"/>
+         <limit lower="-100.0" upper="100.0" effort="20" velocity="0.1"/>
       </joint>
 
       <joint type="fixed" name="right_finger_offset">
