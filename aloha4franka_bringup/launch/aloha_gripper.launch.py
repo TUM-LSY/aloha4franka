@@ -84,7 +84,12 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "-c", "controller_manager"],
+        arguments=["gripper_state_broadcaster", "-c", "controller_manager"],
+        output="screen",
+    )
+    reboot_server = Node(
+        package="aloha4franka_bringup",
+        executable="reboot_server",
         output="screen",
     )
     robot_state_publisher = Node(
@@ -119,7 +124,7 @@ def generate_launch_description():
         controller_manager,
         gripper_controller_spawner,
         joint_state_broadcaster_spawner,
-        robot_state_publisher,
+        # robot_state_publisher,
         # rviz,
     ]
 
@@ -128,7 +133,11 @@ def generate_launch_description():
         GroupAction(
             actions=[
                 PushRosNamespace(namespace=namespace),
-                *nodes,
+                GroupAction(
+                    actions=[
+                        PushRosNamespace(namespace="gripper"),
+                        *nodes,
+                ]),
             ]
         ),
     ])

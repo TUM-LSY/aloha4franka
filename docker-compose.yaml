@@ -1,7 +1,8 @@
 services:
-  aloha4franka:
+  base:
     build:
       context: .
+      target: base
       args:
         ROS_DISTRO: humble
     container_name: aloha4franka_container
@@ -28,6 +29,8 @@ services:
       ROS_DOMAIN_ID: 100
       RCUTILS_COLORIZED_OUTPUT: 1
       SHELL: /bin/bash
+      DEVICE: /dev/gripper_right
+      NAMESPACE: right
 
     cap_add:
       - SYS_NICE
@@ -37,3 +40,28 @@ services:
       rttime: -1
       memlock: 8428281856
 
+  overlay:
+    extends: base
+    image: aloha4franka:overlay
+    build:
+      context: .
+      target: overlay
+    container_name: aloha4franka_overlay_container
+
+  launch_aloha_gripper:
+    extends: overlay
+    container_name: aloha4franka_gripper_container
+    command: >
+      bash -c "source /opt/ros/humble/setup.bash &&
+      source install/setup.bash &&
+      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
+
+  launch_aloha_gripper_cyclone:
+    extends: overlay
+    container_name: aloha4franka_gripper_cyclone_container
+    command: >
+      bash -c "source /opt/ros/humble/setup.bash &&
+      source install/setup.bash &&
+      export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp &&
+      export CYCLONEDDS_URI=file:///home/ros/ros2_ws/src/aloha4franka/scripts/cyclone_config.xml &&
+      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"

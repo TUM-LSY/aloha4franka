@@ -1,6 +1,6 @@
 ARG ROS_DISTRO=humble
  
-FROM osrf/ros:${ROS_DISTRO}-desktop
+FROM osrf/ros:${ROS_DISTRO}-desktop AS base
 
 ENV ROS_DISTRO=${ROS_DISTRO}
 
@@ -56,6 +56,7 @@ RUN apt-get update && \
     libeigen3-dev \
     ros-$ROS_DISTRO-ros2-control \
     ros-$ROS_DISTRO-ros2-controllers \
+    ros-humble-rmw-cyclonedds-cpp \
     dpkg
 
 
@@ -68,18 +69,33 @@ RUN mkdir -p /home/ros/ros2_ws/src
 
 WORKDIR /home/ros/ros2_ws/src
 
-RUN git clone https://github.com/youtalk/dynamixel_hardware.git -b $ROS_DISTRO && \
+RUN git clone -b humble https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
+    git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface.git && \
+    git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_interfaces.git && \
+    source /opt/ros/$ROS_DISTRO/setup.bash && \
+    colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+
+RUN git clone https://github.com/frankaemika/franka_description.git && \
     cd .. && \
     rosdep update && \
     rosdep install --from-paths src --ignore-src -r -y && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
-    touch src/dynamixel_hardware/COLCON_IGNORE
-
-RUN git clone https://github.com/frankaemika/franka_description.git && \
-    cd .. && \
-    source /opt/ros/$ROS_DISTRO/setup.bash && \
-    colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && \
     touch src/franka_description/COLCON_IGNORE
 
 SHELL ["/bin/bash", "-c"]
+
+FROM base AS overlay
+
+WORKDIR /home/ros/ros2_ws
+COPY . src/aloha4franka
+
+RUN source /opt/ros/humble/setup.bash \
+    && source install/setup.bash \
+    && sudo apt update \
+    && rosdep update \
+    && rosdep install -q --from-paths src --ignore-src -y \ 
+    && colcon build --symlink-install --symlink-install \ 
+        --cmake-args -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON

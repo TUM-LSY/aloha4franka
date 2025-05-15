@@ -8,6 +8,18 @@ This repository contains:
 - An assembly guide as well as URDF files for an aloha gripper modification that allows it to be mounted on a franka emika robot and any robot with ...
 - A simple control setup to test the gripper in ROS2
 
+## Getting started
+
+Run
+```bash
+docker compose build
+NAMESPACE=right DEVICE=/dev/gripper_right docker compose up launch_aloha_gripper
+```
+to start the gripper.
+
+> [!WARNING]  
+> If you work in different machines (using [crisp_py](https://github.com/utiasDSL/crisp_py) or others) you might want to consider using cyclonedds as you ROS middleware.
+> Simply run the cyclone version `NAMESPACE=right DEVICE=/dev/gripper_right docker compose up launch_aloha_gripper_cyclone`
 
 | Quantity | Part | Link for Germany | Price |
 | --- | --- | --- | --- |
