@@ -2,7 +2,7 @@
     "name": "Aloha4Franka",
     "privileged": true,
     "remoteUser": "ros",
-    "dockerComposeFile": "../docker-compose.yaml",
+    "dockerComposeFile": "./docker-compose.yaml",
     "workspaceFolder": "/home/ros/ros2_ws/src/aloha4franka",
     "service": "aloha4franka",
     "features": {
