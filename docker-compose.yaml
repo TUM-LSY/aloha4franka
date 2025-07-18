@@ -60,8 +60,24 @@ services:
     extends: overlay
     container_name: aloha4franka_gripper_cyclone_container
     command: >
+      bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
+      source /opt/ros/humble/setup.bash &&
+      source install/setup.bash &&
+      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
+
+  launch_aloha_trigger_and_gripper:
+    extends: overlay
+    container_name: aloha4franka_trigger_and_gripper_container
+    command: >
       bash -c "source /opt/ros/humble/setup.bash &&
       source install/setup.bash &&
-      export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp &&
-      export CYCLONEDDS_URI=file:///home/ros/ros2_ws/src/aloha4franka/scripts/cyclone_config.xml &&
-      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
+      ros2 launch aloha4franka_bringup aloha_trigger_and_gripper.launch.py device:=${DEVICE}"
+
+  launch_aloha_trigger_and_gripper_cyclone:
+    extends: overlay
+    container_name: aloha4franka_trigger_and_gripper_cyclone_container
+    command: >
+      bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
+      source /opt/ros/humble/setup.bash &&
+      source install/setup.bash &&
+      ros2 launch aloha4franka_bringup aloha_trigger_and_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <robot name="aloha_gripper" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find aloha4franka_description)/urdf/aloha_gripper_base.urdf.xacro" />
   <xacro:include filename="$(find aloha4franka_description)/urdf/aloha_trigger_and_gripper.ros2_control.urdf.xacro" />
 
   <!--<xacro:arg name="use_dummy" default="false" />-->
   <xacro:arg name="device" default="/dev/ttyUSB0" />
-  <xacro:arg name="uncontrolled" default="false" />
 
   <link name="world"/>
 
@@ -18,8 +18,9 @@
   <joint type="revolute" name="trigger_joint">
       <parent link="gripper_base"/>
       <child link="trigger_link"/>
+      <limit lower="0.0" upper="0.5" effort="20" velocity="0.1"/>
   </joint>
 
 
-  <xacro:aloha_trigger_and_gripper_ros2_control name="aloha_trigger_and_gripper_ros2_control" use_dummy="false" device="$(arg device)" uncontrolled="$(arg uncontrolled)"/>
+  <xacro:aloha_trigger_and_gripper_ros2_control name="aloha_trigger_and_gripper_ros2_control" use_dummy="false" device="$(arg device)"/>
 </robot>

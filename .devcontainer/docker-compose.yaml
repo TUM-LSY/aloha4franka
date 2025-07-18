@@ -4,7 +4,7 @@ services:
       context: ..
       args:
         ROS_DISTRO: humble
-    container_name: aloha4franka_container
+    container_name: aloha4franka_devcontainer
 
     # === Tune this to your application ===
     network_mode: "host"

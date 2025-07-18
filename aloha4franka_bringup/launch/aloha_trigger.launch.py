@@ -16,7 +16,7 @@ from launch_ros.actions import Node, PushRosNamespace
 def generate_launch_description():
     this_pkg_name = "aloha4franka_bringup"
     description_pkg_name = "aloha4franka_description"
-    urdf_file = "urdf/aloha_gripper.urdf.xacro"
+    urdf_file = "urdf/aloha_trigger.urdf.xacro"
 
     namespace = LaunchConfiguration("namespace")
     device = LaunchConfiguration("device")
@@ -76,66 +76,29 @@ def generate_launch_description():
         on_exit=Shutdown(),
     )
 
-    gripper_controller_spawner = Node(
+    trigger_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["gripper_position_controller", "-c", "controller_manager"],
-        # arguments=["gripper_effort_controller", "-c", "controller_manager"],
-        # arguments=["gripper_velocity_controller", "-c", "controller_manager"],
+        arguments=["trigger_effort_controller", "-c", "controller_manager"],
         output="screen",
     )
-    joint_state_broadcaster_spawner = Node(
+    trigger_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["gripper_state_broadcaster", "-c", "controller_manager"],
+        arguments=["trigger_state_broadcaster", "-c", "controller_manager"],
         output="screen",
     )
-    reboot_server = Node(
-        package="aloha4franka_bringup",
-        executable="reboot_server",
-        output="screen",
-    )
-    diagnostics_publisher = Node(
-        package="aloha4franka_bringup",
-        executable="diagnostics_publisher",
-        output="screen",
-    )
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        name="robot_state_publisher",
-        output="screen",
-        parameters=[
-            {
-                "robot_description": robot_description_content,
-                "use_tf_static": True,
-                "publish_frequency": 30.0,
-            }
-        ],
-    )
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="screen",
-        arguments=[
-            "-d",
-            os.path.join(
-                get_package_share_directory(description_pkg_name),
-                "rviz",
-                "view_config.rviz",
-            ),
-        ],
-    )
+    # reboot_server = Node(
+    #     package="aloha4franka_bringup",
+    #     executable="reboot_server",
+    #     output="screen",
+    # )
 
     nodes = [
         controller_manager,
-        gripper_controller_spawner,
-        reboot_server,
-        diagnostics_publisher,
-        # joint_state_broadcaster_spawner,
-        # robot_state_publisher,
-        # rviz,
+        trigger_controller_spawner,
+        trigger_state_broadcaster_spawner,
+        # reboot_server,
     ]
 
     return LaunchDescription(
@@ -146,7 +109,7 @@ def generate_launch_description():
                     PushRosNamespace(namespace=namespace),
                     GroupAction(
                         actions=[
-                            PushRosNamespace(namespace="gripper"),
+                            PushRosNamespace(namespace="trigger"),
                             *nodes,
                         ]
                     ),

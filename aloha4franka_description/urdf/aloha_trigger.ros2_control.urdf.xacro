@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="aloha_trigger_and_gripper_ros2_control" params="name use_dummy device">
+  <xacro:macro name="aloha_trigger_ros2_control" params="name use_dummy device">
 
     <ros2_control name="${name}" type="system">
 
@@ -11,16 +11,10 @@
           <param name="baud_rate">57600</param>
           <!--<param name="error_timeout_ms">100</param>-->
           <param name="dynamixel_model_folder">/param/dxl_model</param>
-          <param name="number_of_joints">2</param>
-          <param name="number_of_transmissions">2</param>
-          <param name="transmission_to_joint_matrix">
-            1, 0,
-            0, 1
-          </param>
-          <param name="joint_to_transmission_matrix">
-            1, 0,
-            0, 1
-          </param>
+          <param name="number_of_joints">1</param>
+          <param name="number_of_transmissions">1</param>
+          <param name="transmission_to_joint_matrix">1</param>
+          <param name="joint_to_transmission_matrix">1</param>
           <param name="dynamixel_state_pub_msg_name">dynamixel_hardware_interface/dxl_state</param>
           <param name="get_dynamixel_data_srv_name">dynamixel_hardware_interface/get_dxl_data</param>
           <param name="set_dynamixel_data_srv_name">dynamixel_hardware_interface/set_dxl_data</param>
@@ -38,42 +32,11 @@
           <!--<param name="prismatic_min">-0.01</param>-->
       </hardware>
 
-      <joint name="left_finger_joint">
-        <param name="id">1</param>
-        <command_interface name="position"/>
-        <!--<command_interface name="velocity"/>-->
-        <!--<command_interface name="effort"/>-->
-        <state_interface name="position"/>
-        <state_interface name="velocity"/>
-        <!--<state_interface name="effort"/>-->
-      </joint>
-
-      <gpio name="dxl1">
-        <param name="type">dxl</param>
-        <param name="ID">1</param>
-
-        <command_interface name="Goal Position"/>
-        <!--<command_interface name="Goal Velocity"/>-->
-        <!--<command_interface name="Goal PWM"/>-->
-
-        <state_interface name="Present Position"/>
-        <state_interface name="Present Velocity"/>
-        <!--<state_interface name="Present Load"/>-->
-
-        <param name="Position P Gain">100</param> <!-- Proportional gain for position control -->
-        <param name="Position I Gain">0</param> <!-- Integral gain for position control -->
-        <param name="Position D Gain">0</param> <!-- Derivative gain for position control -->
-        <param name="Drive Mode">0</param>
-        <param name="Operating Mode">3</param>
-        <param name="Return Delay Time">0</param>
-
-      </gpio>
-
       <joint name="trigger_joint">
         <command_interface name="effort"/>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
-        <!--<state_interface name="effort"/>-->
+        <state_interface name="effort"/>
       </joint>
 
       <gpio name="dxl2">
@@ -84,12 +47,11 @@
 
         <state_interface name="Present Position"/>
         <state_interface name="Present Velocity"/>
-        <!--<state_interface name="Present Load"/>-->
+        <state_interface name="Present Load"/>
         <param name="Drive Mode">0</param>
         <param name="Operating Mode">16</param>
         <param name="Return Delay Time">0</param>
       </gpio>
-
     </ros2_control>
 
   </xacro:macro>

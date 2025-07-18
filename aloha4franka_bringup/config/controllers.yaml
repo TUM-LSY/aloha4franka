@@ -6,12 +6,18 @@
       gripper_position_controller:
         type: position_controllers/JointGroupPositionController
 
-      gripper_effort_controller:
-        type: effort_controllers/JointGroupEffortController
-
       gripper_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
 
+      trigger_position_controller:
+        type: position_controllers/JointGroupPositionController
+
+      trigger_effort_controller:
+        type: effort_controllers/JointGroupEffortController
+        
+      trigger_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
+        
       joint_trajectory_controller:
         type: joint_trajectory_controller/JointTrajectoryController
 
@@ -20,34 +26,26 @@
       joints:
         - left_finger_joint
 
-      command_interfaces:
-        - position
 
-      state_interfaces:
-        - position
-
-  gripper_effort_controller:
+  trigger_effort_controller:
     ros__parameters:
       joints:
-        - left_finger_joint
+        - trigger_joint
 
-      command_interfaces:
-        - effort
-
-      state_interfaces:
-        - position
+  trigger_position_controller:
+    ros__parameters:
+      joints:
+        - trigger_joint
 
   gripper_state_broadcaster:
     ros__parameters:
-      joints:
-        - fr3_joint1
-        - fr3_joint2
-        - fr3_joint3
-        - fr3_joint4
-        - fr3_joint5
-        - fr3_joint6
-        - fr3_joint7
-        - left_finger_joint
+      use_local_topics: true
+      joints: ["left_finger_joint"]
+
+  trigger_state_broadcaster:
+    ros__parameters:
+      use_local_topics: true
+      joints: ["trigger_joint"]
 
   joint_trajectory_controller:
     ros__parameters:
