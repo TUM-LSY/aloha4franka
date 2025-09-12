@@ -1,4 +1,4 @@
-![Aloha4franka](media/Aloha_Assembly_2025-May-07_05-29-50PM-000_CustomizedView22279176464.png)
+![Aloha4franka](media/gripper_5.png)
 
 # Aloha4Franka
 
