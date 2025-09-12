@@ -31,6 +31,8 @@ services:
       SHELL: /bin/bash
       DEVICE: /dev/gripper_right
       NAMESPACE: right
+      ROS_NETWORK_INTERFACE: lo
+      RMW: fast
 
     cap_add:
       - SYS_NICE
@@ -50,18 +52,10 @@ services:
 
   launch_aloha_gripper:
     extends: overlay
-    container_name: aloha4franka_gripper_container
-    command: >
-      bash -c "source /opt/ros/humble/setup.bash &&
-      source install/setup.bash &&
-      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
-
-  launch_aloha_gripper_cyclone:
-    extends: overlay
     container_name: aloha4franka_gripper_cyclone_container
     command: >
       bash -c "source /opt/ros/humble/setup.bash &&
       source install/setup.bash &&
-      export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp &&
-      export CYCLONEDDS_URI=file:///home/ros/ros2_ws/src/aloha4franka/scripts/cyclone_config.xml &&
+      export ROS_NETWORK_INTERFACE=${ROS_NETWORK_INTERFACE:-lo} &&
+      RMW=${RMW:-} source src/crisp_controllers_demos/scripts/setup_middleware.sh &&
       ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
