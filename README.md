@@ -4,22 +4,49 @@
 
 <a href="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml"><img src="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml/badge.svg"/></a>
 
+A cheap gripper - estimated 350€ - with real-time control capabilities and compatible with any cobot.
+The gripper can be used with [CRISP](https://utiasdsl.github.io/crisp_controllers/) to record data as well as deploying learning-based policies.
+
 This repository contains:
-- An assembly guide as well as URDF files for an aloha gripper modification that allows it to be mounted on a franka emika robot and any robot with ...
-- A simple control setup to test the gripper in ROS2
+- An assembly guide as well as URDF files for an aloha gripper modification that allows it to be mounted on end-effector complying with ISO 9409-1, like FR3 of Franka Robotics, UR3 of Universal Robots...
+- A simple control setup to test the gripper in ROS2o
+- A handle with a trigger to allow for teleoperation and gripper control in a leader-follower system.
+
+
+## Assembly guide
+
+👷 TODO 👷
 
 ## Getting started
 
-Run
+First clone this repository:
+```bash
+git clone https://github.com/TUM-LSY/aloha4franka.git
+cd aloha4franka
+```
+Plug the motors to your computer, they should be listed as `/dev/ttyACM0` or `/dev/ttyUSB0`.
+Check out using a tool like [cyme](https://github.com/tuna-f1sh/cyme) the serial-id for the gripper.
+Modify `scripts/99_gripper.rules` with your gripper serial-id:
+
+```bash
+SUBSYSTEM=="tty", ATTRS{serial}=="FT9HDCKD", SYMLINK+="gripper_right", MODE="0666", ATTR{device/latency_timer}="1"
+```
+
+Now build and run
+
 ```bash
 docker compose build
 NAMESPACE=right DEVICE=/dev/gripper_right docker compose up launch_aloha_gripper
 ```
 to start the gripper.
 
+You can control the gripper using [CRISP after calibration](https://utiasdsl.github.io/crisp_controllers/misc/calibrate_gripper/).
+
 > [!WARNING]  
-> If you work in different machines (using [crisp_py](https://github.com/utiasDSL/crisp_py) or others) you might want to consider using cyclonedds as you ROS middleware.
-> Simply run the cyclone version `NAMESPACE=right DEVICE=/dev/gripper_right docker compose up launch_aloha_gripper_cyclone`
+> If you work in different machines (using [crisp_py](https://github.com/utiasDSL/crisp_py) or others) you might want to consider using CycloneDDS or Zenoh as you ROS middleware.
+> Simply run the cyclone/zenoh version `RMW=cyclone NAMESPACE=right DEVICE=/dev/gripper_right docker compose up launch_aloha_gripper`
+
+## Part list
 
 | Quantity | Part | Link for Germany | Price |
 | --- | --- | --- | --- |
@@ -43,3 +70,7 @@ Tools for assembly
 - M3 Tap [Conrad](https://www.conrad.de/de/p/exact-05937-einschnittgewindebohrer-7teilig-metrisch-m3-m4-m5-m6-m8-m10-rechtsschneidend-din-3126-hss-1-set-813035.html)
 - Adjustable tap wrench [Conrad](https://www.conrad.de/de/p/exact-04971-windeisen-m1-m8-din-1814-816718.html)
 
+## Similar projects
+
+Check out [Actuated UMI](https://github.com/actuated-umi/actuated-umi-gripper), which is a nice alternative gripper using an UMI like gripper.
+We also plan to use rayfin fingers in a future iteration...
