@@ -2,9 +2,8 @@
 
 # Aloha4Franka
 
-> Main contributors - Daniel San José Pro and Marcel Rath
-
 <a href="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml"><img src="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml/badge.svg"/></a>
+> Main contributors - Daniel San José Pro and Marcel Rath
 
 A budget-friendly robotic gripper (only ~€350) with real-time control capabilities, designed to work seamlessly with any collaborative robot.
 
