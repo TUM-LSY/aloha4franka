@@ -10,7 +10,7 @@
 > [!WARNING]
 > 👷 Work in progress! 👷
 
-A budget-friendly robotic gripper (only ~€350) with real-time control capabilities, designed to work seamlessly with any collaborative robot.
+A budget-friendly robotic gripper (only ~€350) with real-time control capabilities, designed to work seamlessly with any collaborative robot. Modified version of the original [Aloha2](https://github.com/tonyzhaozh/aloha).
 
 Perfect for researchers and makers who want to record high-quality manipulation data with [CRISP](https://utiasdsl.github.io/crisp_controllers/) and want a budget friendly gripper.
 
@@ -31,4 +31,3 @@ Perfect for researchers and makers who want to record high-quality manipulation 
 ## Similar community projects
 
 - [Actuated UMI](https://github.com/actuated-umi/actuated-umi-gripper) - Another open-source gripper design also using Dynamixel
-- **Coming Soon:** We're working on integrating rayfin fingers...
