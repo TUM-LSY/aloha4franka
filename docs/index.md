@@ -1,7 +1,5 @@
 <img alt="tum-lsy-gripper" src="media/banner.png" />
 
----
-
 # Aloha4Franka
 
 <a href="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml"><img src="https://github.com/danielsanjosepro/ros2_docker_template/actions/workflows/docker_build.yml/badge.svg"/></a>
