@@ -10,15 +10,15 @@ repo_url: https://github.com/tum-lsy/aloha4franka
 
 theme:
   name: material
-  # logo: images/logo.png
-  # favicon: images/favicon.png
+  logo: images/logo.png
+  favicon: images/favicon.png
   palette:
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default 
-      primary: teal
-      accent: deep purple
+      primary: light-green
+      accent: red
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -26,8 +26,8 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: teal
-      accent: deep purple
+      primary: light-green
+      accent: red
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
