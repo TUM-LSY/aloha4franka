@@ -1,4 +1,4 @@
-<img width="1977" height="808" alt="tum-lsy-gripper" src="https://github.com/user-attachments/assets/3e100fbb-e1ab-4537-ae66-75202729d069" />
+<img alt="tum-lsy-gripper" src="docs/media/banner.png" />
 
 # Aloha4Franka
 
