@@ -35,4 +35,3 @@ Perfect for researchers and makers who want to record high-quality manipulation 
 
 - [Actuated UMI](https://github.com/actuated-umi/actuated-umi-gripper) - Another open-source gripper design also using Dynamixel
 
-![Aloha4franka](media/gripper_5.png)
