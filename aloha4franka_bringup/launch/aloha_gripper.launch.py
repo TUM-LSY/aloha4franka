@@ -133,7 +133,7 @@ def generate_launch_description():
         gripper_controller_spawner,
         reboot_server,
         diagnostics_publisher,
-        # joint_state_broadcaster_spawner,
+        joint_state_broadcaster_spawner,
         # robot_state_publisher,
         # rviz,
     ]

@@ -87,8 +87,8 @@ def generate_launch_description():
     trigger_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        # arguments=["trigger_position_controller", "-c", "controller_manager"],
-        arguments=["trigger_effort_controller", "-c", "controller_manager"],
+        arguments=["trigger_position_controller", "-c", "controller_manager"],
+        # arguments=["trigger_effort_controller", "-c", "controller_manager"],
         output="screen",
     )
     joint_state_broadcaster_spawner = Node(
@@ -151,7 +151,7 @@ def generate_launch_description():
         trigger_state_broadcaster_spawner,
         reboot_server,
         diagnostics_publisher,
-        robot_state_publisher,
+        # robot_state_publisher,
         # rviz,
     ]
 

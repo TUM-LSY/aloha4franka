@@ -94,9 +94,6 @@ COPY . src/aloha4franka
 
 RUN source /opt/ros/humble/setup.bash \
     && source install/setup.bash \
-    && sudo apt update \
-    && rosdep update \
-    && rosdep install -q --from-paths src --ignore-src -y \ 
     && colcon build --symlink-install --symlink-install \ 
         --cmake-args -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON

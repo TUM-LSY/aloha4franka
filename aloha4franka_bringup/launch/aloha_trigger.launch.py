@@ -79,7 +79,7 @@ def generate_launch_description():
     trigger_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["trigger_effort_controller", "-c", "controller_manager"],
+        arguments=["trigger_position_controller", "-c", "controller_manager"],
         output="screen",
     )
     trigger_state_broadcaster_spawner = Node(
@@ -88,17 +88,17 @@ def generate_launch_description():
         arguments=["trigger_state_broadcaster", "-c", "controller_manager"],
         output="screen",
     )
-    # reboot_server = Node(
-    #     package="aloha4franka_bringup",
-    #     executable="reboot_server",
-    #     output="screen",
-    # )
+    reboot_server = Node(
+        package="aloha4franka_bringup",
+        executable="reboot_server",
+        output="screen",
+    )
 
     nodes = [
         controller_manager,
         trigger_controller_spawner,
         trigger_state_broadcaster_spawner,
-        # reboot_server,
+        reboot_server,
     ]
 
     return LaunchDescription(
