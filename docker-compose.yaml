@@ -50,6 +50,16 @@ services:
       target: overlay
     container_name: aloha4franka_overlay_container
 
+  launch_aloha:
+    extends: overlay
+    container_name: aloha4franka_gripper_container
+    command: >
+      bash -c "source /opt/ros/humble/setup.bash &&
+      source install/setup.bash &&
+      export ROS_NETWORK_INTERFACE=${ROS_NETWORK_INTERFACE:-lo} &&
+      RMW=${RMW:-} source src/aloha4franka/scripts/setup_middleware.sh &&
+      ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
+
   launch_aloha_gripper:
     extends: overlay
     container_name: aloha4franka_gripper_cyclone_container
