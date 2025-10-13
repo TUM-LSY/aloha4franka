@@ -1,0 +1,10 @@
+[project]
+name = "aloha4franka"
+version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.15",
+    "mkdoxy>=1.2.7",
+]
