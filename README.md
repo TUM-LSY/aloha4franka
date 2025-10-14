@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repo is heavily under clean-up. Do not expect everything to work.
+
 <img alt="tum-lsy-gripper" src="docs/media/banner.png" />
 
 # Aloha4Franka
