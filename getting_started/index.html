@@ -327,6 +327,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -338,6 +351,61 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get the code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-symlink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a symlink
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-a-start-the-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build a start the container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibrate-and-test-the-gripper-with-crisp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calibrate and Test the gripper with CRISP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -363,6 +431,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get-the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get the code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-symlink" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a symlink
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-a-start-the-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build a start the container
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calibrate-and-test-the-gripper-with-crisp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calibrate and Test the gripper with CRISP
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -381,28 +493,63 @@
 
 
 <h1 id="getting-started">Getting Started</h1>
-<p>Ready to control your own robotic gripper? Let's get started.
-First, grab the code:
+<p>Ready to control your own robotic gripper? Let's get started.</p>
+<h3 id="get-the-code">Get the code</h3>
+<p>First, clone the repository:
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TUM-LSY/aloha4franka.git
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>aloha4franka
 </span></code></pre></div></p>
-<p>Connect your motors - They'll show up as <code>/dev/ttyACM0</code> or <code>/dev/ttyUSB0</code>.
+<h3 id="create-a-symlink">Create a symlink</h3>
+<p>Connect your motors, to the power and the USB to your computer - They'll show up as <code>/dev/ttyACM0</code> or <code>/dev/ttyUSB0</code>.
 Find your gripper's serial ID using <a href="https://github.com/tuna-f1sh/cyme">cyme</a> (or <code>lsusb</code>).
 Configure the udev rule - Update <code>scripts/99_gripper.rules</code> with your serial ID:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;tty&quot;</span>,<span class="w"> </span>ATTRS<span class="o">{</span>serial<span class="o">}==</span><span class="s2">&quot;FT9HDCKD&quot;</span>,<span class="w"> </span><span class="nv">SYMLINK</span><span class="o">+=</span><span class="s2">&quot;gripper_right&quot;</span>,<span class="w"> </span><span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>,<span class="w"> </span>ATTR<span class="o">{</span>device/latency_timer<span class="o">}=</span><span class="s2">&quot;1&quot;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;tty&quot;</span>,<span class="w"> </span>ATTRS<span class="o">{</span>serial<span class="o">}==</span><span class="s2">&quot;FT9HDCKD&quot;</span>,<span class="w"> </span><span class="nv">SYMLINK</span><span class="o">+=</span><span class="s2">&quot;name_for_your_gripper&quot;</span>,<span class="w"> </span><span class="nv">MODE</span><span class="o">=</span><span class="s2">&quot;0666&quot;</span>,<span class="w"> </span>ATTR<span class="o">{</span>device/latency_timer<span class="o">}=</span><span class="s2">&quot;1&quot;</span>
 </span></code></pre></div>
-<p>Build and launch:</p>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>build
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">NAMESPACE</span><span class="o">=</span>right<span class="w"> </span><span class="nv">DEVICE</span><span class="o">=</span>/dev/gripper_right<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>launch_aloha_gripper
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you skip this step, you will have to manually set the mode of the gripper every time you power it off with:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">666</span><span class="w"> </span>/dev/ttyUSB0
+</span></code></pre></div>
+Also, it might be that the device name varies every time you plug it in.
+We highly recommend not skipping this step.</p>
+</div>
+<h3 id="build-a-start-the-container">Build a start the container</h3>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>build
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">NAMESPACE</span><span class="o">=</span>your_namespace<span class="w"> </span><span class="nv">DEVICE</span><span class="o">=</span>/dev/name_for_your_gripper<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>launch_aloha
 </span></code></pre></div>
 to start the gripper.</p>
-<p>Ready to control! Use <a href="https://utiasdsl.github.io/crisp_controllers/misc/calibrate_gripper/">CRISP after calibration</a> to start manipulating objects.</p>
 <div class="admonition note">
 <p class="admonition-title">Using a different RMW</p>
 <p>Multi-machine setup? For distributed systems using <a href="https://github.com/utiasDSL/crisp_py">crisp_py</a>, we recommend CycloneDDS or Zenoh middleware for better performance!
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">RMW</span><span class="o">=</span>cyclone<span class="w"> </span><span class="nv">NAMESPACE</span><span class="o">=</span>right<span class="w"> </span><span class="nv">DEVICE</span><span class="o">=</span>/dev/gripper_right<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>launch_aloha_gripper
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nv">ROS_NETWORK_INTERFACE</span><span class="o">=</span>enpXXXX<span class="w"> </span><span class="nv">RMW</span><span class="o">=</span>cyclone<span class="w"> </span><span class="nv">NAMESPACE</span><span class="o">=</span>right<span class="w"> </span><span class="nv">DEVICE</span><span class="o">=</span>/dev/name_for_your_gripper<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>launch_aloha
 </span></code></pre></div></p>
 </div>
+<h3 id="calibrate-and-test-the-gripper-with-crisp">Calibrate and Test the gripper with CRISP</h3>
+<p>Now the gripper is ready to control!
+You can get the topic joint values as well as command topics to communicate with the gripper.
+If you use <a href="https://github.com/utiasDSL/crisp_py">crisp_py</a> or <a href="https://github.com/utiasDSL/crisp_gym">crisp_gym</a> you can use your gripper to it.</p>
+<p>First run a calibration:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>crisp_py/scripts/gripper_manual_calibration.py<span class="w"> </span>--help
+</span></code></pre></div></p>
+<p>The script will guide you in the calibration procedure:</p>
+<p><img alt="media/gripper_calibration_output.png" src="../media/gripper_calibration_output.png" /></p>
+<p>After running a succesful calibration, you can instantiate a gripper object to control it:</p>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">crisp_py.gripper.gripper</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gripper</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">gripper</span> <span class="o">=</span> <span class="n">Gripper</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="s2">&quot;your_gripper_config.yaml&quot;</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">gripper</span><span class="o">.</span><span class="n">wait_until_ready</span><span class="p">()</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">gripper</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">gripper</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="n">gripper</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+</span></code></pre></div>
+Enjoy the gripper!</p>
 
 
 
