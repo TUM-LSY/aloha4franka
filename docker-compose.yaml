@@ -33,6 +33,7 @@ services:
       NAMESPACE: right
       ROS_NETWORK_INTERFACE: lo
       RMW: fast
+      FASTDDS_BUILTIN_TRANSPORTS: UDPv4
 
     cap_add:
       - SYS_NICE
