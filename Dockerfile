@@ -57,7 +57,7 @@ RUN apt-get update && \
     ros-$ROS_DISTRO-ros2-control \
     ros-$ROS_DISTRO-ros2-controllers \
     ros-$ROS_DISTRO-diagnostics \
-    ros-humble-rmw-cyclonedds-cpp \
+    ros-$ROS_DISTRO-rmw-cyclonedds-cpp \
     dpkg
 
 
@@ -70,9 +70,9 @@ RUN mkdir -p /home/ros/ros2_ws/src
 
 WORKDIR /home/ros/ros2_ws/src
 
-RUN git clone -b humble https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
-    git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface.git && \
-    git clone -b humble https://github.com/ROBOTIS-GIT/dynamixel_interfaces.git && \
+RUN git clone -b $ROS_DISTRO https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
+    git clone -b $ROS_DISTRO https://github.com/ROBOTIS-GIT/dynamixel_hardware_interface.git && \
+    git clone -b $ROS_DISTRO https://github.com/ROBOTIS-GIT/dynamixel_interfaces.git && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
@@ -92,7 +92,7 @@ FROM base AS overlay
 WORKDIR /home/ros/ros2_ws
 COPY . src/aloha4franka
 
-RUN source /opt/ros/humble/setup.bash \
+RUN source /opt/ros/$ROS_DISTRO/setup.bash \
     && source install/setup.bash \
     && colcon build --symlink-install --symlink-install \ 
         --cmake-args -DCMAKE_BUILD_TYPE=Release \

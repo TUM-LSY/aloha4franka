@@ -4,7 +4,7 @@ services:
       context: .
       target: base
       args:
-        ROS_DISTRO: humble
+        ROS_DISTRO: ${ROS_DISTRO:-humble}
     container_name: aloha4franka_container
 
     # === Tune this to your application ===
@@ -24,6 +24,7 @@ services:
       - /dev:/dev
 
     environment:
+      ROS_DISTRO: ${ROS_DISTRO:-humble}
       QT_X11_NO_MITSHM: 1
       DISPLAY: $DISPLAY
       ROS_DOMAIN_ID: 100
@@ -54,7 +55,7 @@ services:
     extends: overlay
     container_name: aloha4franka_gripper_container
     command: >
-      bash -c "source /opt/ros/humble/setup.bash &&
+      bash -c "source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       export ROS_NETWORK_INTERFACE=${ROS_NETWORK_INTERFACE:-enp4s0} &&
       RMW=${RMW:-} source src/aloha4franka/scripts/setup_middleware.sh &&
@@ -65,7 +66,7 @@ services:
     container_name: aloha4franka_gripper_cyclone_container
     command: >
       bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
-      source /opt/ros/humble/setup.bash &&
+      source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
 
@@ -74,7 +75,7 @@ services:
     container_name: aloha4franka_gripper_cyclone_v1_container
     command: >
       bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
-      source /opt/ros/humble/setup.bash &&
+      source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
 
@@ -83,7 +84,7 @@ services:
     container_name: aloha4franka_gripper_cyclone_v2_container
     command: >
       bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
-      source /opt/ros/humble/setup.bash &&
+      source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
 
@@ -92,7 +93,7 @@ services:
     container_name: aloha4franka_trigger_cyclone_container
     command: >
       bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
-      source /opt/ros/humble/setup.bash &&
+      source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_trigger.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
 
@@ -100,7 +101,7 @@ services:
     extends: overlay
     container_name: aloha4franka_trigger_and_gripper_container
     command: >
-      bash -c "source /opt/ros/humble/setup.bash &&
+      bash -c "source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_trigger_and_gripper.launch.py device:=${DEVICE}"
 
@@ -109,6 +110,6 @@ services:
     container_name: aloha4franka_trigger_and_gripper_cyclone_container
     command: >
       bash -c "source src/aloha4franka/scripts/set_cyclone_config.sh
-      source /opt/ros/humble/setup.bash &&
+      source /opt/ros/${ROS_DISTRO:-humble}/setup.bash &&
       source install/setup.bash &&
       ros2 launch aloha4franka_bringup aloha_trigger_and_gripper.launch.py namespace:=${NAMESPACE} device:=${DEVICE}"
