@@ -1,0 +1,242 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/822c78063286bb98e41ccf48/w/29c938ccac0b1bc6b7904035/e/f3e0108e415eaf8cfb9b64a8 -->
+<robot name="aloha4franka">
+  <!-- Root link = base_link frame (at origin, axis-aligned) -->
+  <link name="base_link"/>
+  <joint name="base_link_to_backplate" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 -0.191297"/>
+    <parent link="base_link"/>
+    <child link="gripper_backplate_v1"/>
+  </joint>
+  <!-- Link gripper_backplate_v1 -->
+  <link name="gripper_backplate_v1">
+    <inertial>
+      <origin xyz="-0.0021023 0.007873 0.026097" rpy="0 0 0"/>
+      <mass value="0.267147"/>
+      <inertia ixx="0.000335963" ixy="-4.63353e-06" ixz="-4.17123e-07" iyy="0.000385312" iyz="3.232e-06" izz="0.000470658"/>
+    </inertial>
+    <!-- Part mocked_motor -->
+    <visual>
+      <origin xyz="-0.0035789 0.010591 0.012" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/mocked_motor.stl"/>
+      </geometry>
+      <material name="mocked_motor_material">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0035789 0.010591 0.012" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/mocked_motor.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part back_connector -->
+    <visual>
+      <origin xyz="0 0 0.0755003" rpy="3.14159 -0 0.191297"/>
+      <geometry>
+        <mesh filename="package://assets/back_connector.stl"/>
+      </geometry>
+      <material name="back_connector_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0755003" rpy="3.14159 -0 0.191297"/>
+      <geometry>
+        <mesh filename="package://assets/back_connector.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part aloha_camera_holder -->
+    <visual>
+      <origin xyz="-0.0079995 0.033417 0.026" rpy="0.191297 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/aloha_camera_holder.stl"/>
+      </geometry>
+      <material name="aloha_camera_holder_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0079995 0.033417 0.026" rpy="0.191297 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets/aloha_camera_holder.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part bridge_rail_helper -->
+    <visual>
+      <origin xyz="0.070765 0.029063 0.0484003" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/bridge_rail_helper.stl"/>
+      </geometry>
+      <material name="bridge_rail_helper_material">
+        <color rgba="0.768627 0.886275 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.070765 0.029063 0.0484003" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/bridge_rail_helper.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part gripper_backplate_v1 -->
+    <visual>
+      <origin xyz="0.0004606 -0.002378 0.0484003" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_backplate_v1.stl"/>
+      </geometry>
+      <material name="gripper_backplate_v1_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0004606 -0.002378 0.0484003" rpy="0 0 -2.9503"/>
+      <geometry>
+        <mesh filename="package://assets/gripper_backplate_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame camera (dummy link + fixed joint) -->
+  <link name="camera">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="camera_frame" type="fixed">
+    <origin xyz="-0.0169866 0.079822 0.0391247" rpy="-0 -0.436333 1.76209"/>
+    <parent link="gripper_backplate_v1"/>
+    <child link="camera"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link finger_v1_left -->
+  <link name="finger_v1_left">
+    <inertial>
+      <origin xyz="-0.0124836 0.0275429 -0.00119378" rpy="0 0 0"/>
+      <mass value="0.0385688"/>
+      <inertia ixx="1.93653e-05" ixy="2.28607e-07" ixz="-5.6596e-08" iyy="8.35053e-06" iyz="1.45353e-06" izz="2.55577e-05"/>
+    </inertial>
+    <!-- Part finger_v1_left -->
+    <visual>
+      <origin xyz="-0.0462507 -0.000851056 0.0348025" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_v1_left.stl"/>
+      </geometry>
+      <material name="finger_v1_left_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0462507 -0.000851056 0.0348025" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_v1_left.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part finger_to_rail_connector -->
+    <visual>
+      <origin xyz="-0.0313507 -0.01215 0.009525" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_to_rail_connector.stl"/>
+      </geometry>
+      <material name="finger_to_rail_connector_material">
+        <color rgba="0.498039 0.498039 0.498039 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0313507 -0.01215 0.009525" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_to_rail_connector.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame right_tip (dummy link + fixed joint) -->
+  <link name="right_tip">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_tip_frame" type="fixed">
+    <origin xyz="-0.0157511 0.089199 -0.00884754" rpy="-1.57078 0 0"/>
+    <parent link="finger_v1_left"/>
+    <child link="right_tip"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from gripper_backplate_v1 to finger_v1_left -->
+  <joint name="right_finger" type="prismatic">
+    <origin xyz="-0.0462222 -0.024304 0.0715003" rpy="1.5708 -0 -1.3795"/>
+    <parent link="gripper_backplate_v1"/>
+    <child link="finger_v1_left"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.04" upper="0"/>
+  </joint>
+  <!-- Link finger_to_rail_connector -->
+  <link name="finger_to_rail_connector">
+    <inertial>
+      <origin xyz="-0.0124834 0.0275429 0.00120375" rpy="0 0 0"/>
+      <mass value="0.0385691"/>
+      <inertia ixx="1.93644e-05" ixy="2.28671e-07" ixz="5.6556e-08" iyy="8.34977e-06" iyz="-1.44639e-06" izz="2.55578e-05"/>
+    </inertial>
+    <!-- Part finger_to_rail_connector_2 -->
+    <visual>
+      <origin xyz="-0.0313507 -0.01215 0.009525" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_to_rail_connector.stl"/>
+      </geometry>
+      <material name="finger_to_rail_connector_2_material">
+        <color rgba="0.498039 0.498039 0.498039 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0313507 -0.01215 0.009525" rpy="-1.5708 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_to_rail_connector.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part finger_v1_right -->
+    <visual>
+      <origin xyz="-0.0462507 -0.000851056 -0.0348025" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_v1_right.stl"/>
+      </geometry>
+      <material name="finger_v1_right_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0462507 -0.000851056 -0.0348025" rpy="-1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/finger_v1_right.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Frame left_tip (dummy link + fixed joint) -->
+  <link name="left_tip">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_tip_frame" type="fixed">
+    <origin xyz="-0.0157511 0.089199 0.00884753" rpy="-1.57082 -0 0"/>
+    <parent link="finger_to_rail_connector"/>
+    <child link="left_tip"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from gripper_backplate_v1 to finger_to_rail_connector -->
+  <joint name="left_finger" type="prismatic">
+    <origin xyz="0.051878 -0.004898 0.0715003" rpy="1.5708 -0 -1.3795"/>
+    <parent link="gripper_backplate_v1"/>
+    <child link="finger_to_rail_connector"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.04"/>
+    <mimic joint="right_finger" multiplier="-1" offset="0"/>
+  </joint>
+</robot>
